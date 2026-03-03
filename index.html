@@ -22,9 +22,13 @@ body {
   margin-bottom: 30px;
 }
 
-.logo iframe {
-  border: 0;
+/* Logo responsive (sin iframe) */
+.logo img {
   display: block;
+  max-width: 220px;   /* ajustá este número si lo querés más grande/chico */
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
 }
 
 .card {
@@ -101,11 +105,9 @@ button:hover {
 
 <div class="container">
 
-  <!--  HEADER  -->
+  <!-- HEADER -->
   <div class="logo">
-    <iframe 
-      <img src="./Logo_Coto_PNG.png" alt="Coto" width="320">
-    </iframe>
+    <img src="./Logo_Coto_PNG.png" alt="Coto">
   </div>
 
   <div class="card">
@@ -120,7 +122,7 @@ button:hover {
       <input type="hidden" name="status" value="Abierto">
       <input type="hidden" name="external" value="1">
 
-      <! Sucursal autocomplete -->
+      <!-- Sucursal autocomplete -->
       <div class="form-group">
         <label>¿En qué sucursal estuviste?</label>
         <input
