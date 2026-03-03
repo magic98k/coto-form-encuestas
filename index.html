@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Encuesta Coto</title>
+
+<style>
+body {
+  margin: 0;
+  background: #f5f5f5;
+  font-family: Arial, sans-serif;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px 20px;
+}
+
+.logo {
+  margin-bottom: 30px;
+}
+
+.logo iframe {
+  border: 0;
+  display: block;
+}
+
+.card {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+  width: 100%;
+  max-width: 480px;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+input[type="text"], textarea {
+  width: 100%;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 14px;
+}
+
+textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Estrellas */
+.rating {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 6px;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  font-size: 40px;
+  color: #bdbdbd;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: #ff0000;
+}
+
+button {
+  background: #ff0000;
+  color: white;
+  border: none;
+  padding: 12px;
+  border-radius: 10px;
+  width: 100%;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+button:hover {
+  background: #cc0000;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <!--  HEADER  -->
+  <div class="logo">
+    <iframe 
+      src="https://redcoto-my.sharepoint.com/personal/206292_coto_com_ar/_layouts/15/embed.aspx?UniqueId=108d6736-e2cd-4b67-a518-7481680b8412"
+      width="320"
+      height="140"
+      scrolling="no">
+    </iframe>
+  </div>
+
+  <div class="card">
+
+    <form action="https://coto--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DV9000004wUEj" method="POST">
+
+      <input type="hidden" name="orgid" value="00DV9000004wUEj">
+      <input type="hidden" name="retURL" value="https://coto.com.ar/">
+      <input type="hidden" name="subject" value="Encuesta de sucursales (Web)">
+      <input type="hidden" name="origin" value="Web">
+      <input type="hidden" name="priority" value="Bajo">
+      <input type="hidden" name="status" value="Abierto">
+      <input type="hidden" name="external" value="1">
+
+      <! Sucursal autocomplete -->
+      <div class="form-group">
+        <label>¿En qué sucursal estuviste?</label>
+        <input
+          type="text"
+          name="00NV900000535Q5"
+          list="sucursales"
+          placeholder="Escribí para buscar..."
+          required>
+        <datalist id="sucursales">
+          <option value="Abasto">
+          <option value="Tortugas">
+          <option value="Garín">
+          <option value="Escobar">
+        </datalist>
+      </div>
+
+      <!-- Calificación -->
+      <div class="form-group">
+        <label>¿Cómo calificás nuestro servicio?</label>
+        <div class="rating">
+          <input type="radio" id="star5" name="00NV900000536Z3" value="5" required>
+          <label for="star5">★</label>
+
+          <input type="radio" id="star4" name="00NV900000536Z3" value="4">
+          <label for="star4">★</label>
+
+          <input type="radio" id="star3" name="00NV900000536Z3" value="3">
+          <label for="star3">★</label>
+
+          <input type="radio" id="star2" name="00NV900000536Z3" value="2">
+          <label for="star2">★</label>
+
+          <input type="radio" id="star1" name="00NV900000536Z3" value="1">
+          <label for="star1">★</label>
+        </div>
+      </div>
+
+      <!-- Comentarios -->
+      <div class="form-group">
+        <label>Dejanos tus comentarios</label>
+        <textarea name="00NV900000536vd" maxlength="1000"></textarea>
+      </div>
+
+      <button type="submit">Enviar</button>
+
+    </form>
+
+  </div>
+</div>
+
+</body>
+</html>
