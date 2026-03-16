@@ -6,8 +6,8 @@
 <title>Encuesta Coto</title>
 
 <style>
-/* Base infalible para evitar desbordes y márgenes raros en mobile */
-* { box-sizing: border-box; }
+
+{ box-sizing: border-box; }
 html, body { width: 100%; overflow-x: hidden; }
 
 body {
@@ -15,13 +15,11 @@ body {
   background: #f0f0f0;
   font-family: Arial, sans-serif;
 }
-
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  /* ✅ Márgenes laterales simétricos siempre */
   padding: 30px 16px;
 }
 
@@ -42,8 +40,7 @@ body {
   padding: 22px;
   border-radius: 18px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-
-  /* ✅ Ocupa el ancho disponible del container (que ya tiene padding simétrico) */
+  
   width: 100%;
   max-width: 480px;
 
@@ -73,7 +70,6 @@ textarea {
   resize: vertical;
 }
 
-/* Estrellas */
 .rating {
   display: flex;
   flex-direction: row-reverse;
@@ -116,10 +112,9 @@ button:hover {
   transform: scale(1.02);
 }
 
-/* MOBILE OPTIMIZADO */
 @media (max-width: 480px) {
   .container {
-    padding: 20px 16px; /* ✅ mantiene 16px por lado */
+    padding: 20px 16px;
   }
 
   .logo {
@@ -157,8 +152,7 @@ button:hover {
 <body>
 
 <div class="container">
-
-  <!-- HEADER -->
+  
   <div class="logo">
     <img src="./Logo_Coto_PNG.png" alt="Coto">
   </div>
@@ -175,7 +169,6 @@ button:hover {
       <input type="hidden" name="status" value="Abierto">
       <input type="hidden" name="external" value="1">
 
-      <!-- Sucursal -->
       <div class="form-group">
         <label>¿En qué sucursal estuviste?</label>
         <input
@@ -192,7 +185,6 @@ button:hover {
         </datalist>
       </div>
 
-      <!-- Calificación -->
       <div class="form-group">
         <label>¿Cómo calificás nuestro servicio?</label>
         <div class="rating">
@@ -213,7 +205,6 @@ button:hover {
         </div>
       </div>
 
-      <!-- Comentarios -->
       <div class="form-group">
         <label>Dejanos tus comentarios</label>
         <textarea name="00NV900000536vd" maxlength="1000"></textarea>
