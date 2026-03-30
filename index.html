@@ -5,6 +5,11 @@
 <title>Encuesta Coto</title>
 
 <style>
+
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
   background: #f5f5f5;
@@ -51,7 +56,6 @@ textarea {
   resize: vertical;
 }
 
-/* ⭐ Estrellas */
 .rating {
   display: flex;
   flex-direction: row-reverse;
@@ -98,7 +102,6 @@ button:hover {
 
 <div class="container">
 
-  <!-- 🔴 HEADER SHAREPOINT -->
   <div class="logo">
     <iframe 
       src="https://redcoto-my.sharepoint.com/personal/206292_coto_com_ar/_layouts/15/embed.aspx?UniqueId=108d6736-e2cd-4b67-a518-7481680b8412"
@@ -120,10 +123,8 @@ button:hover {
       <input type="hidden" name="status" value="Abierto">
       <input type="hidden" name="external" value="1">
 
-      <!-- 🏬 Sucursal oculta -->
       <input type="hidden" name="00NV900000535Q5" value="Abasto">
 
-      <!-- ⭐ Calificación -->
       <div class="form-group">
         <label>¿Cómo calificás nuestro servicio?</label>
         <div class="rating">
@@ -143,8 +144,6 @@ button:hover {
           <label for="star1">★</label>
         </div>
       </div>
-
-      <!-- 📝 Comentarios -->
       <div class="form-group">
         <label>Dejanos tus comentarios</label>
         <textarea name="00NV900000536vd" maxlength="1000"></textarea>
