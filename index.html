@@ -2,74 +2,56 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Encuesta Coto</title>
 
 <style>
-
-{ box-sizing: border-box; }
-html, body { width: 100%; overflow-x: hidden; }
-
 body {
   margin: 0;
-  background: #f0f0f0;
+  background: #f5f5f5;
   font-family: Arial, sans-serif;
 }
+
 .container {
   display: flex;
   flex-direction: column;
   align-items: center;
-
-  padding: 30px 16px;
+  padding: 40px 20px;
 }
 
 .logo {
-  margin-bottom: 18px;
+  margin-bottom: 30px;
 }
 
-.logo img {
+.logo iframe {
+  border: 0;
   display: block;
-  max-width: 220px;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
 }
 
 .card {
-  background: #ffffff;
-  padding: 22px;
-  border-radius: 18px;
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
   box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  
   width: 100%;
   max-width: 480px;
-
   text-align: center;
 }
 
 .form-group {
-  margin-bottom: 18px;
+  margin-bottom: 20px;
 }
 
-label {
-  display: block;
-  margin-bottom: 8px;
-}
-
-input[type="text"],
 textarea {
   width: 100%;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #ccc;
   font-size: 14px;
-}
-
-textarea {
   min-height: 100px;
   resize: vertical;
 }
 
+/* ⭐ Estrellas */
 .rating {
   display: flex;
   flex-direction: row-reverse;
@@ -99,52 +81,15 @@ button {
   color: white;
   border: none;
   padding: 12px;
-  border-radius: 12px;
+  border-radius: 10px;
   width: 100%;
   font-weight: bold;
   cursor: pointer;
   transition: 0.2s;
-  font-size: 15px;
 }
 
 button:hover {
   background: #cc0000;
-  transform: scale(1.02);
-}
-
-@media (max-width: 480px) {
-  .container {
-    padding: 20px 16px;
-  }
-
-  .logo {
-    margin-bottom: 14px;
-  }
-
-  .logo img {
-    max-width: 160px;
-  }
-
-  .card {
-    padding: 18px;
-    border-radius: 16px;
-  }
-
-  .form-group {
-    margin-bottom: 14px;
-  }
-
-  .rating label {
-    font-size: 30px;
-  }
-
-  textarea {
-    min-height: 80px;
-  }
-
-  button {
-    padding: 10px;
-  }
 }
 </style>
 </head>
@@ -152,9 +97,15 @@ button:hover {
 <body>
 
 <div class="container">
-  
+
+  <!-- 🔴 HEADER SHAREPOINT -->
   <div class="logo">
-    <img src="./Logo_Coto_PNG.png" alt="Coto">
+    <iframe 
+      src="https://redcoto-my.sharepoint.com/personal/206292_coto_com_ar/_layouts/15/embed.aspx?UniqueId=108d6736-e2cd-4b67-a518-7481680b8412"
+      width="320"
+      height="140"
+      scrolling="no">
+    </iframe>
   </div>
 
   <div class="card">
@@ -169,22 +120,10 @@ button:hover {
       <input type="hidden" name="status" value="Abierto">
       <input type="hidden" name="external" value="1">
 
-      <div class="form-group">
-        <label>¿En qué sucursal estuviste?</label>
-        <input
-          type="text"
-          name="00NV900000535Q5"
-          list="sucursales"
-          placeholder="Escribí para buscar..."
-          required>
-        <datalist id="sucursales">
-          <option value="Abasto">
-          <option value="Tortugas">
-          <option value="Garín">
-          <option value="Escobar">
-        </datalist>
-      </div>
+      <!-- 🏬 Sucursal oculta -->
+      <input type="hidden" name="00NV900000535Q5" value="Abasto">
 
+      <!-- ⭐ Calificación -->
       <div class="form-group">
         <label>¿Cómo calificás nuestro servicio?</label>
         <div class="rating">
@@ -205,6 +144,7 @@ button:hover {
         </div>
       </div>
 
+      <!-- 📝 Comentarios -->
       <div class="form-group">
         <label>Dejanos tus comentarios</label>
         <textarea name="00NV900000536vd" maxlength="1000"></textarea>
