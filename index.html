@@ -1,155 +1,424 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
 <meta charset="UTF-8">
-<title>Encuesta Coto</title>
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reclamos Sucursales — Coto (cascada)</title>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800&family=Barlow:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  background: #f5f5f5;
-  font-family: Arial, sans-serif;
-}
-
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 40px 20px;
-}
-
-.logo {
-  margin-bottom: 30px;
-}
-
-.logo iframe {
-  border: 0;
-  display: block;
-}
-
-.card {
-  background: #fff;
-  padding: 30px;
-  border-radius: 16px;
-  box-shadow: 0 8px 25px rgba(0,0,0,0.08);
-  width: 100%;
-  max-width: 480px;
-  text-align: center;
-}
-
-.form-group {
-  margin-bottom: 20px;
-}
-
-textarea {
-  width: 100%;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 14px;
-  min-height: 100px;
-  resize: vertical;
-}
-
-.rating {
-  display: flex;
-  flex-direction: row-reverse;
-  justify-content: center;
-  gap: 6px;
-}
-
-.rating input {
-  display: none;
-}
-
-.rating label {
-  font-size: 40px;
-  color: #bdbdbd;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-.rating input:checked ~ label,
-.rating label:hover,
-.rating label:hover ~ label {
-  color: #ff0000;
-}
-
-button {
-  background: #ff0000;
-  color: white;
-  border: none;
-  padding: 12px;
-  border-radius: 10px;
-  width: 100%;
-  font-weight: bold;
-  cursor: pointer;
-  transition: 0.2s;
-}
-
-button:hover {
-  background: #cc0000;
-}
+  :root {
+    --rojo: #CC0000; --rojo-oscuro: #990000; --negro: #111111;
+    --gris-oscuro: #222222; --gris-medio: #444444; --gris-claro: #f4f4f4;
+    --blanco: #ffffff; --borde: #dddddd; --sombra: 0 4px 24px rgba(0,0,0,0.10);
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Barlow',sans-serif;background:var(--gris-claro);min-height:100vh;display:flex;flex-direction:column;align-items:center;}
+  header{width:100%;background:var(--rojo);padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:64px;box-shadow:0 2px 12px rgba(204,0,0,.25);}
+  .logo{font-family:'Barlow Condensed',sans-serif;font-weight:800;font-size:2rem;color:#fff;letter-spacing:2px;text-transform:uppercase;}
+  .header-tag{font-family:'Barlow Condensed',sans-serif;font-size:.85rem;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:3px;text-transform:uppercase;}
+  main{width:100%;max-width:680px;margin:48px auto 60px;padding:0 20px;}
+  .form-header h1{font-family:'Barlow Condensed',sans-serif;font-size:2.2rem;font-weight:800;color:var(--negro);text-transform:uppercase;line-height:1.1;}
+  .form-header h1 span{color:var(--rojo);}
+  .form-header p{margin-top:10px;color:var(--gris-medio);font-size:.95rem;line-height:1.6;}
+  .card{background:#fff;border-radius:4px;box-shadow:var(--sombra);border-top:4px solid var(--rojo);padding:36px 40px;margin-top:28px;}
+  .seccion{margin-bottom:28px;}
+  .seccion-titulo{font-family:'Barlow Condensed',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--rojo);margin-bottom:16px;padding-bottom:8px;border-bottom:1px solid var(--borde);}
+  .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:16px;}
+  .col-full{grid-column:1/-1;}
+  .campo{display:flex;flex-direction:column;gap:6px;}
+  .campo.oculto{display:none;}
+  label{font-size:.8rem;font-weight:600;color:var(--gris-oscuro);text-transform:uppercase;letter-spacing:.5px;}
+  label .req{color:var(--rojo);margin-left:2px;}
+  label .opt{color:#999;text-transform:none;font-weight:500;letter-spacing:0;}
+  input,select{width:100%;padding:11px 14px;border:1.5px solid var(--borde);border-radius:3px;font-family:'Barlow',sans-serif;font-size:.95rem;background:#fff;appearance:none;}
+  input:focus,select:focus{outline:none;border-color:var(--rojo);box-shadow:0 0 0 3px rgba(204,0,0,.08);}
+  select{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23444' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;padding-right:36px;cursor:pointer;}
+  select:disabled{background-color:#f4f4f4;cursor:not-allowed;color:#aaa;}
+  .aviso{background:#fff8f8;border:1px solid #ffd5d5;border-radius:3px;padding:12px 16px;font-size:.84rem;color:var(--gris-oscuro);line-height:1.5;margin-bottom:20px;}
+  .aviso strong{color:var(--rojo);}
+  .btn-enviar{width:100%;padding:15px;background:var(--rojo);color:#fff;border:none;border-radius:3px;font-family:'Barlow Condensed',sans-serif;font-size:1.05rem;font-weight:700;letter-spacing:2px;text-transform:uppercase;cursor:pointer;}
+  .btn-enviar:hover{background:var(--rojo-oscuro);}
+  .debug{margin-top:24px;background:#111;color:#0f0;font-family:monospace;font-size:.78rem;padding:16px;border-radius:4px;white-space:pre-wrap;word-break:break-word;display:none;}
+  .debug.visible{display:block;}
+  .mensaje-exito{display:none;text-align:center;padding:48px 32px;}
+  .mensaje-exito.visible{display:block;}
+  .check-icono{width:64px;height:64px;background:var(--rojo);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;font-size:1.8rem;color:#fff;}
+  .mensaje-exito h2{font-family:'Barlow Condensed',sans-serif;font-size:1.8rem;font-weight:800;text-transform:uppercase;color:var(--negro);margin-bottom:10px;}
+  .mensaje-exito p{color:var(--gris-medio);font-size:.97rem;line-height:1.6;}
+  footer{text-align:center;font-size:.78rem;color:#aaa;padding:24px 0;}
 </style>
 </head>
-
 <body>
 
-<div class="container">
+<header>
+  <div class="logo">Coto</div>
+  <div class="header-tag">Sistema de Reclamos</div>
+</header>
 
-  <div class="logo">
-    <img src="Logo_Coto_PNG.png" alt="Logo Coto" style="width:200px;">
+<main>
+  <div class="form-header">
+    <h1>Formulario de<br><span>Reclamo de Cliente</span></h1>
+    <p>Ejemplo funcional: cascada Subtipo → Motivo → Sub Motivo 1, con campos dinámicos por combinación (Finanzas - Venta Presencial / Doble Cobro-Cobro Incorrecto).</p>
   </div>
 
   <div class="card">
+    <form id="formReclamo" novalidate>
 
-    <form action="https://coto--uat.sandbox.my.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00DV9000004wUEj" method="POST">
-
-      <input type="hidden" name="orgid" value="00DV9000004wUEj">
-      <input type="hidden" name="retURL" value="https://coto.com.ar/">
-      <input type="hidden" name="subject" value="Encuesta de sucursales (Web)">
-      <input type="hidden" name="origin" value="Web">
-      <input type="hidden" name="priority" value="Bajo">
-      <input type="hidden" name="status" value="Abierto">
-      <input type="hidden" name="external" value="1">
-
-      <input type="hidden" name="00NV900000535Q5" value="Abasto">
-
-      <div class="form-group">
-        <label>¿Cómo calificás nuestro servicio?</label>
-        <div class="rating">
-          <input type="radio" id="star5" name="00NV900000536Z3" value="5" required>
-          <label for="star5">★</label>
-
-          <input type="radio" id="star4" name="00NV900000536Z3" value="4">
-          <label for="star4">★</label>
-
-          <input type="radio" id="star3" name="00NV900000536Z3" value="3">
-          <label for="star3">★</label>
-
-          <input type="radio" id="star2" name="00NV900000536Z3" value="2">
-          <label for="star2">★</label>
-
-          <input type="radio" id="star1" name="00NV900000536Z3" value="1">
-          <label for="star1">★</label>
+      <div class="seccion">
+        <div class="seccion-titulo">Datos del Cliente</div>
+        <div class="grid-2">
+          <div class="campo"><label>Nombre <span class="req">*</span></label><input type="text" name="nombre" required></div>
+          <div class="campo"><label>Apellido <span class="req">*</span></label><input type="text" name="apellido" required></div>
+          <div class="campo"><label>DNI <span class="req">*</span></label><input type="text" name="dni" required></div>
+          <div class="campo"><label>Teléfono <span class="req">*</span></label><input type="tel" name="telefono" required></div>
+          <div class="campo col-full"><label>Email <span class="req">*</span></label><input type="email" name="email" required></div>
         </div>
       </div>
-      <div class="form-group">
-        <label>Dejanos tus comentarios</label>
-        <textarea name="00NV900000536vd" maxlength="1000"></textarea>
+
+      <div class="seccion">
+        <div class="seccion-titulo">Origen del Reclamo</div>
+        <div class="grid-2">
+          <div class="campo col-full">
+            <label>Subtipo <span class="req">*</span></label>
+            <select id="selSubtipo" required>
+              <option value="">Seleccioná...</option>
+              <option value="Sucursal">Sucursal</option>
+              <option value="Super App">Super App</option>
+            </select>
+          </div>
+        </div>
       </div>
 
-      <button type="submit">Enviar</button>
+      <div class="seccion" id="seccionSinCargar" style="display:none;">
+        <div class="aviso" style="margin-bottom:0;">
+          <strong>Super App</strong> todavía no tiene tipificación cargada en este formulario. Avisá al equipo para completarla.
+        </div>
+      </div>
 
+      <div class="seccion" id="seccionTipificacion" style="display:none;">
+        <div class="seccion-titulo">Tipificación del Reclamo</div>
+        <div class="grid-2">
+          <div class="campo">
+            <label>Motivo <span class="req">*</span></label>
+            <select id="selMotivo" required disabled>
+              <option value="">Seleccioná...</option>
+            </select>
+          </div>
+          <div class="campo col-full">
+            <label>Sub Motivo 1 <span class="req">*</span></label>
+            <select id="selSubMotivo1" required disabled>
+              <option value="">Seleccioná Motivo primero</option>
+            </select>
+          </div>
+        </div>
+      </div>
+
+      <!-- CAMPOS DINÁMICOS -->
+      <div class="seccion" id="seccionDinamica" style="display:none;">
+        <div class="seccion-titulo">Detalle del Reclamo</div>
+        <div class="grid-2">
+          <div class="campo" data-campo="medioPago">
+            <label>Medio de Pago <span class="req marca-obligatorio">*</span></label>
+            <select name="medioPago">
+              <option value="">Seleccioná...</option>
+              <option>Débito</option>
+              <option>Crédito</option>
+            </select>
+          </div>
+          <div class="campo" data-campo="numTarjeta">
+            <label>N° Tarjeta (primeros 8 y últimos 4) <span class="req marca-obligatorio">*</span></label>
+            <input type="text" name="numTarjeta" placeholder="Ej: 45491234...5678">
+          </div>
+          <div class="campo" data-campo="idCompra">
+            <label>ID de Compra <span class="req marca-obligatorio">*</span></label>
+            <input type="text" name="idCompra">
+          </div>
+          <div class="campo" data-campo="importeCompra">
+            <label>Importe de Compra <span class="req marca-obligatorio">*</span></label>
+            <input type="text" name="importeCompra" placeholder="$">
+          </div>
+          <div class="campo" data-campo="fechaCompra">
+            <label>Fecha de Compra <span class="req marca-obligatorio">*</span></label>
+            <input type="date" name="fechaCompra">
+          </div>
+          <div class="campo" data-campo="banco">
+            <label>Banco <span class="opt">(opcional)</span></label>
+            <input type="text" name="banco">
+          </div>
+          <div class="campo" data-campo="importeExtraccion">
+            <label>Importe Extracción <span class="opt">(opcional)</span></label>
+            <input type="text" name="importeExtraccion" placeholder="$">
+          </div>
+        </div>
+      </div>
+
+      <div class="aviso">
+        <strong>¿Cómo funciona?</strong> Según Subtipo, Motivo y Sub Motivo 1 elegidos, el sistema arma automáticamente el Record Type, la Gerencia y el Owner del caso — el cliente no ve estos valores.
+      </div>
+
+      <button type="submit" class="btn-enviar">Enviar Reclamo</button>
     </form>
 
+    <!-- ÉXITO -->
+    <div class="mensaje-exito" id="mensajeExito">
+      <div class="check-icono">✓</div>
+      <h2>Reclamo enviado</h2>
+      <p id="mensajeExitoTexto">Tu reclamo fue enviado correctamente.</p>
+    </div>
+
+    <div class="debug" id="debugPayload"></div>
   </div>
-</div>
+
+  <footer>Coto C.I.C.S.A. · Sistema de Reclamos · Salesforce Service Cloud</footer>
+</main>
+
+<script>
+/* =========================================================
+   CONFIGURACIÓN DE LA CASCADA
+   (esto es lo que hay que ir ampliando con el resto del Excel)
+========================================================= */
+
+// Motivos disponibles por Subtipo (COTO_subType__c)
+const MOTIVOS_POR_SUBTIPO = {
+  "Sucursal": ["Doble Cobro / Cobro Incorrecto"]
+  // "Super App": todavía sin cargar
+};
+
+// Sub Motivo 1 disponibles por Motivo
+const SUBMOTIVO1_POR_MOTIVO = {
+  "Doble Cobro / Cobro Incorrecto": [
+    "Pago con Tarjeta",
+    "Pago en QR Mercado Pago",
+    "Pago en QR Pin Pad",
+    "Pago en QR Coto",
+    "Pago Clave Cuenta DNI"
+  ]
+};
+
+// Campos obligatorios según Sub Motivo 1 (keys = data-campo del HTML)
+const CAMPOS_POR_SUBMOTIVO1 = {
+  "Pago con Tarjeta":          { obligatorios: ["medioPago", "numTarjeta", "importeCompra", "fechaCompra"] },
+  "Pago en QR Mercado Pago":   { obligatorios: ["idCompra", "importeCompra", "fechaCompra"] },
+  "Pago en QR Pin Pad":        { obligatorios: ["medioPago", "numTarjeta", "idCompra", "importeCompra", "fechaCompra"] },
+  "Pago en QR Coto":           { obligatorios: ["idCompra", "importeCompra", "fechaCompra"] },
+  "Pago Clave Cuenta DNI":     { obligatorios: ["numTarjeta", "importeCompra", "fechaCompra"] }
+};
+
+// Campos opcionales que siempre pueden aparecer si hay al menos un campo dinámico visible
+const CAMPOS_OPCIONALES_SIEMPRE = ["banco", "importeExtraccion"];
+
+// Mapeo campo interno -> API Name de Salesforce
+const API_NAMES = {
+  medioPago:         "COTO_PaymentMethod__c",
+  numTarjeta:        "COTO_CardMaskedNumber__c",
+  importeCompra:     "COTO_Amount__c",
+  fechaCompra:       "COTO_PurchaseDate_c__c",
+  idCompra:          "COTO_Purchaseid__c",
+  banco:             "COTO_Bank__c",
+  importeExtraccion: "COTO_WithdrawalAmount__c"
+};
+
+// Valores fijos por combinación de Subtipo + Motivo (Record Type, Gerencia, Owner)
+// En este ejemplo son constantes porque "Dirigido a" es el mismo para las 5 filas del Excel,
+// pero la estructura ya queda lista para variar por Motivo o Sub Motivo si hiciera falta.
+const CONTEXTO_SALESFORCE = {
+  RecordTypeId:        "012Vw0000059BvsIAE", // Tipo: Reclamo de cliente
+  COTO_Management__c:  "a05V900000P8Vh5IAF", // Gerencia (test Slack)
+  OwnerId:             "005V900000O4fRmIAJ"
+};
+
+/* =========================================================
+   LÓGICA DE CASCADA
+========================================================= */
+
+const selSubtipo    = document.getElementById('selSubtipo');
+const selMotivo     = document.getElementById('selMotivo');
+const selSubMotivo1 = document.getElementById('selSubMotivo1');
+const seccionDinamica     = document.getElementById('seccionDinamica');
+const seccionTipificacion = document.getElementById('seccionTipificacion');
+const seccionSinCargar    = document.getElementById('seccionSinCargar');
+
+function llenarSelect(select, opciones, placeholder) {
+  select.innerHTML = '<option value="">' + placeholder + '</option>';
+  opciones.forEach(op => {
+    const o = document.createElement('option');
+    o.value = op; o.textContent = op;
+    select.appendChild(o);
+  });
+  select.disabled = opciones.length === 0;
+}
+
+selSubtipo.addEventListener('change', function () {
+  const motivos = MOTIVOS_POR_SUBTIPO[this.value] || [];
+
+  // Reset siempre que cambie el Subtipo
+  llenarSelect(selSubMotivo1, [], 'Seleccioná Motivo primero');
+  selSubMotivo1.disabled = true;
+  ocultarCamposDinamicos();
+
+  if (this.value === 'Sucursal') {
+    seccionSinCargar.style.display = 'none';
+    seccionTipificacion.style.display = 'block';
+    llenarSelect(selMotivo, motivos, 'Seleccioná...');
+    selMotivo.required = true;
+    selSubMotivo1.required = true;
+  } else if (this.value === 'Super App') {
+    seccionTipificacion.style.display = 'none';
+    seccionSinCargar.style.display = 'block';
+    selMotivo.required = false;
+    selSubMotivo1.required = false;
+  } else {
+    seccionTipificacion.style.display = 'none';
+    seccionSinCargar.style.display = 'none';
+    selMotivo.required = false;
+    selSubMotivo1.required = false;
+  }
+});
+
+selMotivo.addEventListener('change', function () {
+  const subs = SUBMOTIVO1_POR_MOTIVO[this.value] || [];
+  llenarSelect(selSubMotivo1, subs, subs.length ? 'Seleccioná...' : 'Sin sub motivos');
+  ocultarCamposDinamicos();
+});
+
+selSubMotivo1.addEventListener('change', function () {
+  if (!this.value) { ocultarCamposDinamicos(); return; }
+  mostrarCamposDinamicos(this.value);
+});
+
+function ocultarCamposDinamicos() {
+  seccionDinamica.style.display = 'none';
+  document.querySelectorAll('#seccionDinamica .campo').forEach(campo => {
+    campo.classList.add('oculto');
+    const input = campo.querySelector('input, select');
+    if (input) { input.required = false; input.value = ''; }
+  });
+}
+
+function mostrarCamposDinamicos(subMotivo1) {
+  const config = CAMPOS_POR_SUBMOTIVO1[subMotivo1];
+  if (!config) { ocultarCamposDinamicos(); return; }
+
+  const camposAMostrar = [...config.obligatorios, ...CAMPOS_OPCIONALES_SIEMPRE];
+
+  document.querySelectorAll('#seccionDinamica .campo').forEach(campoDiv => {
+    const key = campoDiv.dataset.campo;
+    const input = campoDiv.querySelector('input, select');
+    const marcaReq = campoDiv.querySelector('.marca-obligatorio');
+
+    if (camposAMostrar.includes(key)) {
+      campoDiv.classList.remove('oculto');
+      if (config.obligatorios.includes(key)) {
+        input.required = true;
+        if (marcaReq) marcaReq.style.display = 'inline';
+      } else {
+        input.required = false;
+        if (marcaReq) marcaReq.style.display = 'none';
+      }
+    } else {
+      campoDiv.classList.add('oculto');
+      input.required = false;
+      input.value = '';
+    }
+  });
+
+  seccionDinamica.style.display = 'block';
+}
+
+/* =========================================================
+   SUBMIT — armado del payload final
+========================================================= */
+
+document.getElementById('formReclamo').addEventListener('submit', function (e) {
+  e.preventDefault();
+
+  const form = this;
+  const requeridos = form.querySelectorAll('[required]');
+  let valido = true;
+  requeridos.forEach(campo => {
+    if (!campo.value.trim()) {
+      campo.style.borderColor = '#CC0000';
+      valido = false;
+    } else {
+      campo.style.borderColor = '';
+    }
+  });
+  if (!selSubtipo.value) valido = false;
+  if (selSubtipo.value === 'Sucursal' && (!selMotivo.value || !selSubMotivo1.value)) valido = false;
+  if (selSubtipo.value === 'Super App') {
+    alert('Super App todavía no tiene tipificación cargada. No se puede enviar este reclamo por acá todavía.');
+    return;
+  }
+
+  if (!valido) {
+    alert('Completá todos los campos obligatorios y la tipificación completa.');
+    return;
+  }
+
+  const datos = new FormData(form);
+
+  // Payload visible (datos del cliente)
+  const payload = {
+    nombre:   datos.get('nombre'),
+    apellido: datos.get('apellido'),
+    dni:      datos.get('dni'),
+    telefono: datos.get('telefono'),
+    email:    datos.get('email'),
+
+    // Tipificación
+    COTO_subType__c:    selSubtipo.value,
+    COTO_reason__c:      selMotivo.value,
+    COTO_subReason1__c:  selSubMotivo1.value,
+
+    // Contexto fijo resuelto automáticamente (no lo ve ni lo toca el cliente)
+    RecordTypeId:        CONTEXTO_SALESFORCE.RecordTypeId,
+    COTO_Management__c:  CONTEXTO_SALESFORCE.COTO_Management__c,
+    OwnerId:              CONTEXTO_SALESFORCE.OwnerId
+  };
+
+  // Campos dinámicos visibles -> se agregan con su API Name real
+  document.querySelectorAll('#seccionDinamica .campo:not(.oculto)').forEach(campoDiv => {
+    const key = campoDiv.dataset.campo;
+    const input = campoDiv.querySelector('input, select');
+    if (input.value) {
+      payload[API_NAMES[key]] = input.value;
+    }
+  });
+
+  enviarReclamo(payload, form);
+});
+
+async function enviarReclamo(payload, form) {
+  const ENDPOINT = 'https://coto--devhp.sandbox.my.salesforce-sites.com/reclamos/services/apexrest/casos/';
+  const btn = form.querySelector('.btn-enviar');
+  btn.disabled = true;
+  btn.textContent = 'Enviando...';
+
+  try {
+    const response = await fetch(ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) throw new Error('Error ' + response.status);
+
+    const caseNumber = await response.text();
+
+    form.style.display = 'none';
+    const exito = document.getElementById('mensajeExito');
+    document.getElementById('mensajeExitoTexto').innerHTML =
+      'Tu reclamo fue registrado correctamente.<br>Número de caso: <strong>' + caseNumber.replace(/"/g, '') + '</strong>';
+    exito.classList.add('visible');
+
+  } catch (err) {
+    alert('Ocurrió un error al enviar el reclamo. Por favor intentá nuevamente.\n\n' + err.message);
+    btn.disabled = false;
+    btn.textContent = 'Enviar Reclamo';
+  }
+}
+</script>
 
 </body>
 </html>
