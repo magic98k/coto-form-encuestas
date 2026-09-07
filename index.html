@@ -65,10 +65,10 @@
         <input type="hidden" name="status" value="Abierto">
         <input type="hidden" name="external" value="1">
         <input type="hidden" name="recordType" value="012V9000001LJIPIA4">
-        <input type="hidden" name="00NV900000535Q5" value="Abasto">
+        <input type="hidden" id="sucursal-field" name="00NV900000535Q5" value="">
 
         <div class="form-group">
-          <label>¿Qué tan probable es que recomiendes a COTO a un familiar o amigo?</label>
+          <label>¿Qué tan probable es que recomiendes esta sucursal a un familiar o amigo?</label>
           <div class="nps-scale">
             <input type="radio" id="nps0" name="00NV900000536Z3" value="0" required><label class="detractor" for="nps0">0</label>
             <input type="radio" id="nps1" name="00NV900000536Z3" value="1"><label class="detractor" for="nps1">1</label>
@@ -110,6 +110,17 @@
 <iframe name="hidden-iframe" style="display:none;"></iframe>
 
 <script>
+  // Toma el codigo de sucursal desde la URL del QR (ej: ?suc=abasto-91)
+  // y lo carga en el campo oculto Sucursal__c (00NV900000535Q5).
+  // El valor debe matchear EXACTO alguna opcion de la picklist en Salesforce.
+  (function() {
+    var params = new URLSearchParams(window.location.search);
+    var sucursal = params.get('suc');
+    if (sucursal) {
+      document.getElementById('sucursal-field').value = sucursal;
+    }
+  })();
+
   document.getElementById('encuesta-form').addEventListener('submit', function() {
     setTimeout(function() {
       document.getElementById('form-section').style.display = 'none';
