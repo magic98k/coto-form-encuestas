@@ -155,7 +155,8 @@
     // como para el mail de compra digital), pero si viene el parametro
     // ?suc= (QR de sucursal) igual lo guardamos en el campo oculto.
     var params = new URLSearchParams(window.location.search);
-    var sucursal = params.get('suc');
+    // SOLO PRUEBA: si no viene ?suc= usa esta sucursal por defecto
+    var sucursal = params.get('suc') || '038-florida';
     if (sucursal) {
       document.getElementById('sucursal-field').value = sucursal;
     }
