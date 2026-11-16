@@ -95,18 +95,18 @@
       <form id="encuesta-form" action="https://webto.salesforce.com/servlet/servlet.WebToCase?encoding=UTF-8&orgId=00Dam00001TB68w" method="POST" target="hidden-iframe">
         <input type="hidden" name="orgid" value="00Dam00001TB68w">
         <input type="hidden" name="retURL" value="https://www.coto.com.ar/">
-        <input type="hidden" name="subject" value="Encuesta de sucursales (Web)">
+        <input type="hidden" name="subject" value="Encuesta COTO Online (Web)">
         <input type="hidden" name="origin" value="Web">
         <input type="hidden" name="priority" value="Bajo">
         <input type="hidden" name="status" value="Abierto">
         <input type="hidden" name="external" value="1">
         <input type="hidden" name="recordType" value="012Vw000007hTp7">
         <input type="hidden" id="sucursal-field" name="00NVw00000378PZ" value="">
-        <input type="hidden" id="pieza-field" name="00NVw000005KxkD" value="">
-<input type="hidden" name="00NVw00000512D0" value="Sucursales">
+        <input type="hidden" id="pedido-field" name="00NVw000005IxUz" value="">
+<input type="hidden" name="00NVw00000512D0" value="COTO Online">
 
         <div class="nps-box">
-          <span class="pregunta">¿Qué tan probable es que recomiendes COTO a un familiar o amigo?</span>
+          <span class="pregunta">¿Qué tan probable es que recomiendes nuestra tienda COTO online a un familiar o amigo?</span>
           <div class="nps-scale">
             <input type="radio" id="nps0" name="00NVw00000378PY" value="0" required><label for="nps0">0</label>
             <input type="radio" id="nps1" name="00NVw00000378PY" value="1"><label for="nps1">1</label>
@@ -135,6 +135,11 @@
       </form>
     </div>
 
+    <div class="thank-you" id="sin-pedido-section">
+      <h2>Ingresá desde el mail de tu compra</h2>
+      <p>Para calificar tu experiencia, usá el botón "Calificar mi experiencia" que recibiste junto con el voucher de tu pedido.</p>
+    </div>
+
     <div class="thank-you" id="thank-you-section">
       <div class="check">✅</div>
       <h2>¡Muchas gracias!</h2>
@@ -143,7 +148,7 @@
 
     <div class="footer">
       <hr>
-      <p>Podés comunicarte con nosotros al <strong>0800-888-4848</strong> de Lunes a Viernes de 8 a 22hs. y Sábados de 8 a 19hs., o por e-mail a <a href="mailto:info@coto.com.ar" class="footer-link">info@coto.com.ar</a></p>
+      <p>Podés comunicarte con nosotros al <strong>0800-888-4848</strong> (opción 2) de Lunes a Viernes de 8 a 22hs. y Sábados de 8 a 19hs., o por e-mail a <a href="mailto:ayuda_cotodigital@cotodigital.com.ar" class="footer-link">ayuda_cotodigital@cotodigital.com.ar</a></p>
       <a class="footer-link" href="https://www.coto.com.ar/" target="_blank">www.coto.com.ar</a>
     </div>
     </div> </div>
@@ -158,9 +163,12 @@
     if (sucursal) {
       document.getElementById('sucursal-field').value = sucursal;
     }
-    var pieza = params.get('b');
-    if (pieza) {
-      document.getElementById('pieza-field').value = pieza;
+    var pedido = (params.get('p') || '').trim();
+    if (/^[A-Za-z0-9_-]{1,40}$/.test(pedido)) {
+      document.getElementById('pedido-field').value = pedido;
+    } else {
+      document.getElementById('form-section').style.display = 'none';
+      document.getElementById('sin-pedido-section').style.display = 'block';
     }
   })();
 
